@@ -1,3 +1,4 @@
+/*consulta y valida el JSON de productos */
 async function cargarProductos() {
     const respuesta = await fetch('./recursos/datos/productos.json')
 
