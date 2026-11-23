@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cba.urban - Detalle de Producto</title>
+    <link rel="stylesheet" href="./recursos/estilos/index.css">
+    <link rel="stylesheet" href="./recursos/estilos/producto.css">
+    <script type="module" src="./recursos/js/carrito.js"></script>
+</head>
+<body>
+
+    <header class="encabezado-principal">
+        <a href="index.html"><img src="./recursos/imagenes/logo-urban.png" alt="Logo de el emprendimiento"></a>
+        <h1 id="titulo-detalle-h1">Detalle del producto</h1>
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" aria-label="Abrir o cerrar menú"><img src="./recursos/imagenes/menu-hamburguesa.svg" alt="Menú"></label>
+        <nav aria-label="Navegación principal">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Catálogo</a></li>
+                <li><a href="ofertas.html">Ofertas</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <form action="./catalogo.html" method="get">
+            <label for="buscar-nav">Buscar:</label>
+            <input type="search" id="buscar-nav" name="q" placeholder="Buscar prendas...">
+            <button type="submit">Buscar</button>
+        </form>
+        <ul>
+            <li><a href="./perfil.html"><img src="./recursos/imagenes/usuario.svg" alt="Mi perfil"></a></li>
+            <li><a href="./carrito.html"><img src="./recursos/imagenes/carrito-de-compras.svg" alt="Carrito"><span id="productos-seleccionados">(0)</span></a></li>
+        </ul>
+    </header>
+
+    <main class="contenido-producto">
+
+        <!-- Ruta -->
+        <nav class="ruta-navegacion" aria-label="Ruta de navegación">
+            <p><a href="index.html">Inicio</a> &gt; <a href="catalogo.html">Prendas</a> &gt; <span id="ruta-producto" aria-current="page">Detalle</span></p>
+        </nav>
+
+        <!-- Contenedor dinamico de la ficha del producto seleccionado -->
+        <article id="contenedor-detalle-producto" class="producto-detalle">
+            <!-- Se renderiza dinamicamente via javascript -->
+        </article>
+
+    </main>
+
+    <footer class="pie-de-pagina-principal">
+        <nav aria-label="Enlaces institucionales">
+            <ul>
+                <li>Política de Privacidad</li>
+                <li>Términos y Condiciones</li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li>Sobre Nosotros</li>
+                <li>Preguntas Frecuentes</li>
+            </ul>
+        </nav>
+        <p>&copy; 2026 cba.urban. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

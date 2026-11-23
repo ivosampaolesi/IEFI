@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cba.urban - Catálogo</title>
+    <link rel="stylesheet" href="./recursos/estilos/index.css">
+    <link rel="stylesheet" href="./recursos/estilos/catalogo.css">
+    <!-- Carga del módulo principal de javascript -->
+    <script type="module" src="./recursos/js/index.js"></script>
+</head>
+
+<body>
+
+    <header class="encabezado-principal">
+        <a href="index.html"><img src="./recursos/imagenes/logo-urban.png" alt="Logo de el emprendimiento"></a>
+        <h1>Catálogo de indumentaria urbana</h1>
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" aria-label="Abrir o cerrar menú"><img src="./recursos/imagenes/menu-hamburguesa.svg" alt="Menú"></label>
+        <nav aria-label="Navegación principal">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html" aria-current="page">Catalogo</a></li>
+                <li><a href="ofertas.html">Ofertas</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <form action="./catalogo.html" method="get">
+            <label for="buscar-nav">Buscar:</label>
+            <input type="search" id="buscar-nav" name="q" placeholder="Buscar prendas...">
+            <button type="submit">Buscar</button>
+        </form>
+        <ul>
+            <li><a href="./perfil.html"><img src="./recursos/imagenes/usuario.svg" alt="Mi perfil"></a></li>
+            <li><a href="./carrito.html"><img src="./recursos/imagenes/carrito-de-compras.svg" alt="Carrito"><span id="productos-seleccionados">(0)</span></a></li>
+        </ul>
+    </header>
+
+    <main class="contenido-catalogo">
+        <h2>Catálogo de Indumentaria</h2>
+
+        <!-- notificación de compra -->
+        <dialog id="dialogo">
+            <h2>Producto añadido</h2>
+            <p>Se ha añadido la prenda seleccionada al carrito de compras.</p>
+            <form method="dialog">
+                <button>Seguir comprando</button>
+            </form>
+        </dialog>
+
+        <!-- Filtros del catálogo -->
+        <details class="filtros-catalogo">
+            <summary>Filtrar</summary>
+            <aside>
+                <h3>Filtros</h3>
+                <form class="formulario-catalogo" action="catalogo.html" method="get">
+                    <div>
+                        <label for="filtro-categoria">Categoría:</label>
+                        <select id="filtro-categoria" name="cat">
+                            <option value="todas">Todas las categorías</option>
+                            <option value="remeras">Remeras</option>
+                            <option value="pantalones">Pantalones</option>
+                            <option value="buzos">Buzos</option>
+                            <option value="camperas">Camperas</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="filtro-talle">Talle:</label>
+                        <select id="filtro-talle" name="talle">
+                            <option value="todos">Todos los talles</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                    </div>
+
+                    <button type="button" id="boton-aplicar-filtros">Aplicar filtros</button>
+                    <button type="button" id="boton-limpiar-filtros">Ver todos</button>
+                </form>
+            </aside>
+        </details>
+
+        <!-- listado dinamico de prendas renderizado via javascript -->
+        <section>
+            <h3>Prendas</h3>
+            <div id="contenedor-productos" class="seccion-prendas-catalogo">
+                <!-- se renderiza dinamicamente via javascript -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="pie-de-pagina-principal">
+        <nav aria-label="Enlaces institucionales">
+            <ul>
+                <li>Política de Privacidad</li>
+                <li>Términos y Condiciones</li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li>Sobre Nosotros</li>
+                <li>Preguntas Frecuentes</li>
+            </ul>
+        </nav>
+        <p>&copy; 2026 cba.urban. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+
+</html>

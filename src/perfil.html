@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cba.urban - Mi Perfil</title>
+    <link rel="stylesheet" href="./recursos/estilos/index.css">
+    <link rel="stylesheet" href="./recursos/estilos/perfil.css">
+    <script type="module" src="./recursos/js/carrito.js"></script>
+    <script type="module" src="./recursos/js/perfil.js"></script>
+</head>
+<body>
+
+    <header class="encabezado-principal">
+        <a href="index.html"><img src="./recursos/imagenes/logo-urban.png" alt="Logo de el emprendimiento"></a>
+        <h1>Mi Perfil</h1>
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" aria-label="Abrir o cerrar menú"><img src="./recursos/imagenes/menu-hamburguesa.svg" alt="Menú"></label>
+        <nav aria-label="Navegación principal">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Catalogo</a></li>
+                <li><a href="ofertas.html">Ofertas</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <form action="./catalogo.html" method="get">
+            <label for="buscar-nav">Buscar:</label>
+            <input type="search" id="buscar-nav" name="q" placeholder="Buscar prendas...">
+            <button type="submit">Buscar</button>
+        </form>
+        <ul>
+            <li><a href="./perfil.html"><img src="./recursos/imagenes/usuario.svg" alt="Mi perfil"></a></li>
+            <li><a href="./carrito.html"><img src="./recursos/imagenes/carrito-de-compras.svg" alt="Carrito"><span id="productos-seleccionados">(0)</span></a></li>
+        </ul>
+    </header>
+
+    <main class="contenido-perfil">
+        <h2>MI CUENTA</h2>
+
+        <!-- Mis Datos / Direcciones -->
+        <section>
+            <h3>Mis Datos y Direcciones</h3>
+            <form id="form-perfil" action="#" method="post">
+                <div>
+                    <label for="usr-nombre">Nombre y Apellido:</label>
+                    <input type="text" id="usr-nombre" name="nombre" value="Martina Gonzalez" minlength="3" required>
+                </div>
+
+                <div>
+                    <label for="usr-email">Correo Electrónico:</label>
+                    <input type="email" id="usr-email" name="email" value="martina@email.com">
+                </div>
+
+                <div>
+                    <label for="usr-tel">Teléfono:</label>
+                    <input type="tel" id="usr-tel" name="telefono" value="3515550199" pattern="[0-9 +()-]{8,20}" required>
+                </div>
+
+                <div>
+                    <label for="usr-dir">Dirección:</label>
+                    <input type="text" id="usr-dir" name="direccion" value="Nueva Córdoba" minlength="5" required>
+                </div>
+
+                <div>
+                    <label for="usr-cp">Código Postal:</label>
+                    <input type="text" id="usr-cp" name="cp" value="5000" pattern="[0-9]{4,8}" inputmode="numeric" required>
+                </div>
+
+                <button type="submit">Guardar cambios</button>
+                <p id="mensaje-perfil" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <!-- Historial de Pedidos -->
+        <section>
+            <h3>Mis Pedidos</h3>
+            <table>
+                <caption>Historial de pedidos de la cuenta</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">N° Orden</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Detalle</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#0102</td>
+                        <td>05/09/2026</td>
+                        <td>Remera Belgrano (L)</td>
+                        <td>$40.000</td>
+                        <td>Entregado</td>
+                    </tr>
+                    <tr>
+                        <td>#0103</td>
+                        <td>12/09/2026</td>
+                        <td>Buzo Urban (M)</td>
+                        <td>$20.000</td>
+                        <td>En camino</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <footer class="pie-de-pagina-principal">
+        <nav aria-label="Enlaces institucionales">
+            <ul>
+                <li>Política de Privacidad</li>
+                <li>Términos y Condiciones</li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li>Sobre Nosotros</li>
+                <li>Preguntas Frecuentes</li>
+            </ul>
+        </nav>
+        <p>&copy; 2026 cba.urban. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./recursos/estilos/index.css">
+    <link rel="stylesheet" href="./recursos/estilos/ofertas.css">
+    <title>cba.urban - Ofertas</title>
+    <script type="module" src="./recursos/js/carrito.js"></script>
+</head>
+<body>
+
+    <!-- Barra superior de anuncios -->
+     <aside class="barra-anuncios" aria-label="Promociones">
+        <p>ENVÍOS A TODO EL PAÍS | 3 CUOTAS SIN INTERÉS</p>
+    </aside>
+
+    
+    <header class="encabezado-principal">
+        <a href="index.html"><img src="./recursos/imagenes/logo-urban.png" alt="Logo de el emprendimiento"></a>
+        <h1>Ofertas en indumentaria urbana</h1>
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" aria-label="Abrir o cerrar menú"><img src="./recursos/imagenes/menu-hamburguesa.svg" alt="Menú"></label>
+
+        <nav aria-label="Navegación principal">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Catalogo</a></li>
+                <li><a href="ofertas.html" aria-current="page">Ofertas</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <form action="./catalogo.html" method="get">
+            <label for="buscar-nav">Buscar:</label>
+            <input type="search" id="buscar-nav" name="q" placeholder="Buscar prendas...">
+            <button type="submit">Buscar</button>
+        </form>
+        <ul>
+            <li><a href="./perfil.html"><img src="./recursos/imagenes/usuario.svg" alt="Mi perfil"></a></li>
+            <li><a href="./carrito.html"><img src="./recursos/imagenes/carrito-de-compras.svg" alt="Carrito"><span id="productos-seleccionados">(0)</span></a></li>
+        </ul>
+
+    </header>
+
+   
+        <main class="contenido-ofertas">
+
+    <!-- Presentacion de ofertas -->
+    <section>
+        <h2>OFERTAS</h2>
+        <p>Hasta 40% OFF en productos seleccionados.</p>
+        <p>Aprovechá nuestros descuentos por tiempo limitado.</p>
+    </section>
+
+    <!-- Productos en oferta -->
+    <section>
+        <h2>Productos en oferta</h2>
+
+        <article>
+            <img src="./recursos/imagenes/realtree-urban.png"
+                 alt="Remera camuflada estilo Real Tree">
+
+            <h3>Remera Real Tree</h3>
+
+            <p>
+                Precio anterior: <del>$40.000</del>
+            </p>
+
+            <p>
+                Precio de oferta: <strong>$30.000</strong>
+            </p>
+
+            <p>25% OFF</p>
+
+            <p>Ficha próximamente disponible</p>
+        </article>
+
+        <article>
+            <img src="./recursos/imagenes/argentina-urban.png"
+                 alt="Camiseta de la selección Argentina">
+
+            <h3>Camiseta selección Argentina</h3>
+
+            <p>
+                Precio anterior: <del>$30.000</del>
+            </p>
+
+            <p>
+                Precio de oferta: <strong>$21.000</strong>
+            </p>
+
+            <p>30% OFF</p>
+
+            <p>Ficha próximamente disponible</p>
+        </article>
+
+        <article>
+            <img src="./recursos/imagenes/roja-urban.png"
+                 alt="Remera Urban roja">
+
+            <h3>Remera Urban Roja</h3>
+
+            <p>
+                Precio anterior: <del>$20.000</del>
+            </p>
+
+            <p>
+                Precio de oferta: <strong>$15.000</strong>
+            </p>
+
+            <p>25% OFF</p>
+
+            <p>Ficha próximamente disponible</p>
+        </article>
+
+        <article>
+            <img src="./recursos/imagenes/verde-urban.png"
+                 alt="Remera Urban verde">
+
+            <h3>Remera Urban Verde</h3>
+
+            <p>
+                Precio anterior: <del>$35.000</del>
+            </p>
+
+            <p>
+                Precio de oferta: <strong>$21.000</strong>
+            </p>
+
+            <p>40% OFF</p>
+
+            <p>Ficha próximamente disponible</p>
+        </article>
+
+    </section>
+
+    <!-- Información de las promociones -->
+    <section>
+        <h2>Información de las ofertas</h2>
+
+        <ul>
+            <li>Promociones válidas hasta agotar stock.</li>
+            <li>Envíos disponibles a todo el país.</li>
+            <li>Hasta 3 cuotas sin interés.</li>
+            <li>Los descuentos no son acumulables con otras promociones.</li>
+        </ul>
+
+        <p>
+            <a href="catalogo.html">Ver catálogo completo</a>
+        </p>
+    </section>
+
+</main>
+      
+
+    
+
+    <!-- Pie de página institucional -->
+    <footer class="pie-de-pagina-principal">
+        <nav aria-label="Enlaces institucionales">
+            <ul>
+                <li>Política de Privacidad</li>
+                <li>Términos y Condiciones</li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li>Sobre Nosotros</li>
+                <li>Preguntas Frecuentes</li>
+            </ul>
+        </nav>
+        <p>&copy; 2026 cba.urban. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

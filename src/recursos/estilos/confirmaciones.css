@@ -1,0 +1,46 @@
+/* aca lo achicamos y lo dejamos
+   como una tarjeta centrada con borde.*/
+.contenido-confirmacion {
+    max-width: 600px;
+    margin: 64px auto;
+    padding: 40px 32px;
+    text-align: center;
+    border: 1px solid #000000;
+}
+.contenido-confirmacion h2 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+
+.contenido-confirmacion p {
+    margin-bottom: 12px;
+}
+
+/* Boton Seguir comprando*/
+.contenido-confirmacion a {
+    display: inline-block;
+    padding: 10px 24px;
+    border: 1px solid #000000;
+    background-color: #000000;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.contenido-confirmacion a:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+
+@media (max-width: 600px) {
+    .contenido-confirmacion {
+        margin: 32px 16px;
+        padding: 32px 20px;
+    }
+
+    .contenido-confirmacion h2 {
+        font-size: 1.6rem;
+    }
+}
