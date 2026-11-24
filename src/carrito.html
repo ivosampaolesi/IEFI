@@ -112,6 +112,11 @@
                 </div>
 
                 <div>
+                    <label for="email-comprador">Correo electrónico:</label>
+                    <input type="email" id="email-comprador" name="email" required placeholder="tunombre@ejemplo.com">
+                </div>
+
+                <div>
                     <label for="dir-comprador">Dirección de entrega:</label>
                     <input type="text" id="dir-comprador" name="direccion" minlength="5" required>
                 </div>
@@ -125,7 +130,8 @@
                     </select>
                 </div>
 
-                <button type="submit">INICIAR COMPRA</button>
+                <button type="submit" id="boton-checkout">INICIAR COMPRA</button>
+                <p id="mensaje-checkout" role="status" aria-live="polite"></p>
             </form>
         </section>
 

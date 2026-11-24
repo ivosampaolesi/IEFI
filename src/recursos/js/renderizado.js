@@ -12,6 +12,7 @@ import {
     calcularCostoEnvio,
     calcularTotal,
     crearPedido,
+    enviarPedidoPorEmail,
     COSTO_ENVIO_FIJO
 } from './carrito.js'
 
@@ -307,16 +308,16 @@ function iniciarPaginaCarrito(productos) {
 
     
     if (formCheckout) {
-        formCheckout.addEventListener('submit', (evento) => {
+        formCheckout.addEventListener('submit', async (evento) => {
+            evento.preventDefault()
+
             const carrito = obtenerCarrito()
             if (carrito.length === 0) {
-                evento.preventDefault()
                 alert('Tu carrito está vacío. Agregá un producto antes de continuar.')
                 return
             }
 
             if (inputCP && !/^[0-9]{4,8}$/.test(inputCP.value.trim())) {
-                evento.preventDefault()
                 if (costoEnvioTexto) {
                     costoEnvioTexto.textContent = 'Ingresá un código postal válido (de 4 a 8 números).'
                 }
@@ -327,12 +328,40 @@ function iniciarPaginaCarrito(productos) {
             const datosComprador = new FormData(formCheckout)
             const pedido = crearPedido({
                 nombre: String(datosComprador.get('nombre') || ''),
+                email: String(datosComprador.get('email') || ''),
                 direccion: String(datosComprador.get('direccion') || ''),
+                pago: String(datosComprador.get('pago') || ''),
                 carrito,
                 listaProductos: productos
             })
 
-            sessionStorage.setItem('pedidoPendiente', JSON.stringify(pedido))
+            const botonSubmit = formCheckout.querySelector('button[type="submit"]')
+            const mensajeCheckout = document.getElementById('mensaje-checkout')
+
+            if (botonSubmit) {
+                botonSubmit.disabled = true
+                botonSubmit.textContent = 'Enviando pedido por correo...'
+            }
+            if (mensajeCheckout) {
+                mensajeCheckout.textContent = 'Enviando notificación por correo electrónico...'
+                mensajeCheckout.style.color = '#333'
+            }
+
+            try {
+                await enviarPedidoPorEmail(pedido)
+                sessionStorage.setItem('pedidoPendiente', JSON.stringify(pedido))
+                window.location.href = 'confirmacion.html'
+            } catch (error) {
+                console.error('Error al enviar el pedido por email:', error)
+                if (mensajeCheckout) {
+                    mensajeCheckout.textContent = 'No se pudo enviar el correo del pedido. Por favor, verificá tu conexión e intentá nuevamente.'
+                    mensajeCheckout.style.color = '#c00'
+                }
+                if (botonSubmit) {
+                    botonSubmit.disabled = false
+                    botonSubmit.textContent = 'INICIAR COMPRA'
+                }
+            }
         })
     }
 
@@ -360,14 +389,16 @@ function iniciarPaginaConfirmacion() {
     `).join('')
 
     contenedorConfirmacion.innerHTML = `
-        <h2>Pedido confirmado</h2>
-        <p>Gracias, ${pedido.nombre}.</p>
-        <p>Dirección de entrega: ${pedido.direccion}</p>
+        <h2>¡Pedido confirmado y enviado con éxito!</h2>
+        <p>Gracias por tu compra, <strong>${pedido.nombre}</strong>.</p>
+        <p>Hemos enviado una copia con el detalle de tu compra a tu correo <strong>${pedido.email}</strong> y una notificación a nuestro equipo de ventas para despachar tu paquete.</p>
+        <p><strong>Dirección de entrega:</strong> ${pedido.direccion}</p>
+        <p><strong>Método de pago:</strong> ${pedido.pago}</p>
+        <h3>Detalle de prendas:</h3>
         <ul>${itemsHTML}</ul>
         <p>Subtotal: $${pedido.subtotal}</p>
         <p>Envío estimado: $${pedido.envio}</p>
         <p>Total: <strong>$${pedido.total}</strong></p>
-        <p>Esta compra es una simulación. No se procesó un pago real.</p>
         <p><a href="catalogo.html">Seguir comprando</a></p>
     `
 
@@ -376,6 +407,54 @@ function iniciarPaginaConfirmacion() {
     actualizarContadorHeader()
 }
 
+/*Inicializa y controla el envío del formulario de contacto*/
+function iniciarPaginaContacto() {
+    const formContacto = document.querySelector('.formulario-contacto')
+    if (!formContacto) return
+
+    formContacto.addEventListener('submit', async (evento) => {
+        evento.preventDefault()
+        const submitBtn = formContacto.querySelector('button[type="submit"]')
+        if (submitBtn) {
+            submitBtn.disabled = true
+            submitBtn.textContent = 'Enviando consulta...'
+        }
+
+        const formData = new FormData(formContacto)
+        const datos = {
+            _subject: `Nueva consulta de ${formData.get('nombre') || 'Cliente'} - cba.urban`,
+            _replyto: formData.get('email'),
+            nombre: formData.get('nombre'),
+            email: formData.get('email'),
+            tipo_consulta: formData.get('tipo-consulta'),
+            comentario: formData.get('comentario')
+        }
+
+        try {
+            const respuesta = await fetch('https://formsubmit.co/ajax/ivodribe@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(datos)
+            })
+
+            if (!respuesta.ok) {
+                throw new Error(`Error en servidor de contacto: ${respuesta.status}`)
+            }
+
+            window.location.href = 'confirmacion-contacto.html'
+        } catch (error) {
+            console.error('Error al enviar consulta:', error)
+            alert('No se pudo enviar la consulta. Por favor, verificá tu conexión e intentá nuevamente.')
+            if (submitBtn) {
+                submitBtn.disabled = false
+                submitBtn.textContent = 'Enviar consulta'
+            }
+        }
+    })
+}
 
 async function iniciarUI() {
     actualizarContadorHeader()
@@ -396,6 +475,7 @@ async function iniciarUI() {
     }
 
     iniciarPaginaConfirmacion()
+    iniciarPaginaContacto()
 }
 
 if (document.readyState === 'loading') {

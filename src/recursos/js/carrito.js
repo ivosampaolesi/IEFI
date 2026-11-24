@@ -139,7 +139,7 @@ function calcularTotal(subtotal, costoEnvio) {
 }
 
 /*Construye el objeto de resumen de pedido para la confirmación de compra*/
-function crearPedido({ nombre, direccion, carrito, listaProductos }) {
+function crearPedido({ nombre, email, direccion, pago, carrito, listaProductos }) {
     const subtotal = calcularSubtotal(carrito, listaProductos)
     const envio = carrito.length > 0 ? COSTO_ENVIO_FIJO : 0
 
@@ -156,12 +156,51 @@ function crearPedido({ nombre, direccion, carrito, listaProductos }) {
 
     return {
         nombre,
+        email: email || '',
         direccion,
+        pago: pago || 'No especificado',
         articulos,
         subtotal,
         envio,
         total: calcularTotal(subtotal, envio)
     }
+}
+
+/*Envía los datos del pedido a la plataforma de correos FormSubmit*/
+async function enviarPedidoPorEmail(pedido) {
+    const endpoint = 'https://formsubmit.co/ajax/ivodribe@gmail.com'
+
+    const listaArticulosTexto = pedido.articulos
+        .map((art) => `- ${art.nombre} (${art.talle}, ${art.color}) x${art.cantidad}: $${art.precio * art.cantidad}`)
+        .join('\n')
+
+    const datosEnvio = {
+        _subject: `Nuevo pedido de ${pedido.nombre} - cba.urban`,
+        _replyto: pedido.email,
+        nombre: pedido.nombre,
+        email: pedido.email,
+        direccion: pedido.direccion,
+        metodo_pago: pedido.pago,
+        detalle_articulos: listaArticulosTexto,
+        subtotal: `$${pedido.subtotal}`,
+        costo_envio: `$${pedido.envio}`,
+        total: `$${pedido.total}`
+    }
+
+    const respuesta = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(datosEnvio)
+    })
+
+    if (!respuesta.ok) {
+        throw new Error(`Error en el servidor de correo: ${respuesta.status}`)
+    }
+
+    return await respuesta.json()
 }
 
 export {
@@ -177,5 +216,6 @@ export {
     calcularSubtotal,
     calcularCostoEnvio,
     calcularTotal,
-    crearPedido
+    crearPedido,
+    enviarPedidoPorEmail
 }
